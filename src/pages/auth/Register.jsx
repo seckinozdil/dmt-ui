@@ -2,19 +2,21 @@ import { useState, useContext } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
-export const Login = (props) => {
+export const Register = (props) => {
+    const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useContext(AuthContext);
+    const { register } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await login({ firstName, password });
-            navigate('/');
+            await register({ email, firstName, lastName, password });
+            navigate('/login');
         } catch (err) {
             console.log(err);
             
@@ -36,19 +38,23 @@ export const Login = (props) => {
                     <div className="form-container">
                         <span className="p-input-icon-left">
                             <i className="pi pi-envelope"></i>
+                            <InputText value={email} type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                        </span>
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-envelope"></i>
                             <InputText value={firstName} type="text" placeholder="Name" onChange={(e) => setFirstName(e.target.value)} />
+                        </span>
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-envelope"></i>
+                            <InputText value={lastName} type="text" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} />
                         </span>
                         <span className="p-input-icon-left">
                             <i className="pi pi-key"></i>
                             <InputText value={password} type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                         </span>
-                        <button className="flex p-link">Forgot your password?</button>
                     </div>
                     <div className="button-container">
-                        <Button type="button" label="Login" onClick={handleSubmit}></Button>
-                        <span>
-                            Don’t have an account?<button className="p-link">Sign-up here</button>
-                        </span>
+                        <Button type="button" label="Register" onClick={handleSubmit}></Button>
                     </div>
                 </div>
 

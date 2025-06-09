@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useLocation, Navigate, Link, } from 'react-router-dom';
 import App from './App';
-import { Login } from './pages/Login';
+import { Login } from './pages/auth/Login';
+import { Register } from './pages/auth/Register';
 import { Error } from './pages/Error';
 import { NotFound } from './pages/NotFound';
 import { Access } from './pages/Access';
@@ -10,14 +11,13 @@ import { useContext } from 'react';
 import { AuthContext } from './context/AuthContext';
 
 const AppWrapper = (props) => {
-    const { user, logout } = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [colorScheme, setColorScheme] = useState('dark');
     const [theme, setTheme] = useState('blue');
     const [componentTheme, setComponentTheme] = useState('blue');
 
     let location = useLocation();
     console.log(user);
-    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location]);
@@ -86,6 +86,7 @@ const AppWrapper = (props) => {
         <Routes>
             {/* <Route path="/login" element={<Login />} /> */}
             <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
+            <Route path='/register' element={<Register/>} />
             <Route path="/error" element={<Error />} />
             <Route path="/notfound" element={<NotFound />} />
             <Route path="/access" element={<Access />} />

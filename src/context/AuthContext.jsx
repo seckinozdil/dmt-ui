@@ -12,11 +12,12 @@ export const AuthProvider = ({ children }) => {
     setUser(res.data.user);
   };
 
-  const signup = async (data) => {
-    await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, data);
+  const register = async (data) => {
+    await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, data);
   };
 
-  const logout = () => {
+  const logout = async () => {
+    await axios.post(`${process.env.REACT_APP_API_URL}/auth/logout`);
     localStorage.removeItem('token');
     setUser(null);
   };
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     if (!token) return;
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/me`, {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data);
@@ -39,7 +40,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout, fetchMe }}>
       {children}
     </AuthContext.Provider>
   );
