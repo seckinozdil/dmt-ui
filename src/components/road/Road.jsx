@@ -12,7 +12,6 @@ export const Road = () => {
     const [selectedKpi, setSelectedKpi] = useState([]);
     const [appliedKpi, setAppliedKpi] = useState(null);
     const [showCells, setShowCells] = useState(false);
-    const [checked, setChecked] = useState(false);
 
     useEffect(() => {
         api.get('/road/routeNames').then((res) => {
