@@ -5,8 +5,7 @@ const RoadPage = () => {
   return (
         <div className='grid'>
             <div className='col-12'>
-                <div className='card'>
-                    <div>Road Page</div>
+                <div className='card' style={{ height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                     <Road />
                 </div>
             </div>

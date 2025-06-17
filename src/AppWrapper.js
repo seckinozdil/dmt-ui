@@ -17,7 +17,7 @@ const AppWrapper = (props) => {
     const [componentTheme, setComponentTheme] = useState('blue');
 
     let location = useLocation();
-    console.log(user);
+    // console.log(user);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location]);
