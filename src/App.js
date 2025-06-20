@@ -44,6 +44,7 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import './App.scss';
 import RoadPage from './pages/road/RoadPage';
+import GridPage from './pages/grid/GridPage';
 
 const App = (props) => {
     const [rightMenuActive, setRightMenuActive] = useState(false);
@@ -75,9 +76,12 @@ const App = (props) => {
         {
             label: 'Maps',
             icon: 'pi pi-map',
-            items: [{ label: 'Road Map', icon: 'pi pi-compass', to: '/road' }]
-        },
-    ]
+            items: [
+                { label: 'Road Map', icon: 'pi pi-compass', to: '/road' },
+                { label: 'Grid Map', icon: 'pi pi-compass', to: '/grid' }
+            ]
+        }
+    ];
 
     // const menu = [
     //     {
@@ -521,8 +525,9 @@ const App = (props) => {
 
                 <div className="layout-main-content">
                     <Routes>
-                        <Route path="/road" element={<RoadPage />} />
                         <Route path="/" exact="true" element={<Dashboard />} />
+                        <Route path="/road" element={<RoadPage />} />
+                        <Route path="/grid" element={<GridPage />} />
                         {/* <Route path="/documentation" element={<Documentation />} />
                         <Route path="/formlayout" element={<FormLayoutDemo />} />
                         <Route path="/floatlabel" element={<FloatLabelDemo />} />
@@ -548,7 +553,6 @@ const App = (props) => {
                         <Route path="/invoice" element={<Invoice colorMode={props.colorScheme} location={location} />} />
                         <Route path="/empty" element={<EmptyPage />} />
                         <Route path="/timeline" element={<TimelineDemo />} /> */}
-                        
                     </Routes>
                 </div>
 

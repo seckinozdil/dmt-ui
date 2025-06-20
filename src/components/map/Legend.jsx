@@ -1,13 +1,14 @@
 // Legend.jsx
 import React from 'react';
+import {KPI_COLORS} from '../../helpers/map'
 
-export const KPI_COLORS = {
-    rsrp: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000'],
-    // rsrp: ['#FF0000', '#FFA500', '#FFFF00', '#00FF00'],
-    rsrq: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000'],
-    avg_dl_throughput: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000'],
-    block: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000']
-};
+// export const KPI_COLORS = {
+//     rsrp: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000'],
+//     // rsrp: ['#FF0000', '#FFA500', '#FFFF00', '#00FF00'],
+//     rsrq: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000'],
+//     avg_dl_throughput: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000'],
+//     block: ['#00FF00', '#FFFF00', '#FFA500', '#FF0000']
+// };
 
 const KPI_LABELS = {
     rsrp: ['≥ -75', '-75 to -100', '-100 to -120', '< -120'],
@@ -30,7 +31,7 @@ const legendStyle = {
     overflowY: 'auto' // 🔄 Uzunluk aşarsa bile kesilmesin
 };
 
-const Legend = ({ selectedKPI }) => {
+export const RoadMapLegend = ({ selectedKPI }) => {
     const colors = KPI_COLORS[selectedKPI] || [];
     const labels = KPI_LABELS[selectedKPI] || [];
 
@@ -54,4 +55,42 @@ const Legend = ({ selectedKPI }) => {
     );
 };
 
-export default Legend;
+export const GridMapLegend = ({ min = 0, max = 100, gradient = [], height = 200, width = 20 }) => {
+    const steps = gradient.length;
+    const stepValue = (max - min) / (steps - 1);
+    const labels = Array.from({ length: steps }, (_, i) => (min + i * stepValue).toFixed(1)).reverse();
+    // console.log('labels', labels);
+
+    return (
+        <div style={{
+            position: 'absolute',
+            right: '10px',
+            bottom: '10px',
+            backgroundColor: 'white',
+            padding: '10px',
+            borderRadius: '6px',
+            boxShadow: '0 0 6px rgba(0,0,0,0.3)',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '12px'
+        }}>
+            <div style={{
+                height: `${height}px`,
+                width: `${width}px`,
+                background: `linear-gradient(to top, ${gradient.join(',')})`
+            }} />
+            <div style={{
+                height: `${height}px`,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between'
+            }}>
+                {labels.map((label, idx) => (
+                    <div key={idx} style={{color: 'black'}}>{label}</div>
+                ))}
+            </div>
+        </div>
+    );
+};
