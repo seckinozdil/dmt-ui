@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import RoadMapView from '../map/MapView';
+import {RoadMapView} from '../map/MapView';
 import api from '../../services/api';
 import { Dropdown } from 'primereact/dropdown';
 import { Button } from 'primereact/button';
@@ -35,7 +35,7 @@ export const Road = () => {
 
     return (
         <>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{ padding: '10px' }}>
                     <Dropdown id="routeNameDropdown" value={selectedRoute} onChange={(e) => setSelectedRoute(e.value)} options={fillRoutes} optionLabel="name" placeholder="Select Route" />
                     <Dropdown id="routeNameDropdown" value={selectedKpi} onChange={(e) => setSelectedKpi(e.value)} options={fillKpiNames} optionLabel="name" placeholder="Select Kpi" className="ml-3" />
