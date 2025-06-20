@@ -1,7 +1,6 @@
-import React from 'react'
 import { Grid } from '../../components/grid/Grid';
 
-const RoadPage = () => {
+const GridPage = () => {
   return (
         <div className='grid'>
             <div className='col-12'>
@@ -13,4 +12,4 @@ const RoadPage = () => {
     );
 }
 
-export default RoadPage
+export default GridPage
